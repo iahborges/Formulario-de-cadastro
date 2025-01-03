@@ -1,40 +1,57 @@
-// Seleção dos botões
-const btnSim = document.getElementById("btn-sim");
-const btnNao = document.getElementById("btn-nao");
+// Definindo os elementos do formulário
+const productNameInput = document.getElementById("product-name");
+const productDescriptionInput = document.getElementById("product-description");
+const productPriceInput = document.getElementById("product-price");
+const productImageInput = document.getElementById("product-image");
+const productForm = document.getElementById("product-form");
 
-// Adiciona evento de clique para o botão "Sim"
-btnSim.addEventListener("click", () => {
-    btnSim.classList.add("active");
-    btnNao.classList.remove("active");
-    console.log("Produto disponível para venda.");
-});
+// Botões de Disponibilidade
+const btnYes = document.getElementById("btn-yes");
+const btnNo = document.getElementById("btn-no");
 
-// Adiciona evento de clique para o botão "Não"
-btnNao.addEventListener("click", () => {
-    btnNao.classList.add("active");
-    btnSim.classList.remove("active");
-    console.log("Produto indisponível para venda.");
-});
-
-// Formulário submetido
-const form = document.getElementById("form");
-form.addEventListener("submit", (event) => {
+// Função para lidar com o envio do formulário
+const handleSubmit = (event) => {
     event.preventDefault();
-    const produtoNome = document.getElementById("name").value;
-    const descricao = document.getElementById("product").value;
-    const valor = document.getElementById("number").value;
-    const disponibilidade = btnSim.classList.contains("active")
-        ? "Disponível"
-        : btnNao.classList.contains("active")
-        ? "Indisponível"
-        : "Não especificado";
 
-    console.log(`
-        Produto: ${produtoNome}
-        Descrição: ${descricao}
-        Valor: ${valor}
-        Disponibilidade: ${disponibilidade}
-    `);
+    const name = productNameInput.value.trim();
+    const description = productDescriptionInput.value.trim();
+    const price = parseFloat(productPriceInput.value);
+    const image = productImageInput.files ? productImageInput.files[0] : null;
 
-    alert("Formulário enviado com sucesso!");
-});
+    if (name && description && price > 0) {
+        Swal.fire({
+            title: 'Cadastro Finalizado!',
+            text: `Produto: ${name}\nDescrição: ${description}\nPreço: R$ ${price.toFixed(2)}`,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        });
+
+        // Limpar o formulário
+        productForm.reset();
+    } else {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Por favor, preencha todos os campos corretamente.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+};
+
+// Função para alternar a disponibilidade do produto
+const toggleAvailability = (isAvailable) => {
+    if (isAvailable) {
+        btnYes.classList.add("active");
+        btnNo.classList.remove("active");
+    } else {
+        btnNo.classList.add("active");
+        btnYes.classList.remove("active");
+    }
+};
+
+// Adicionar eventos de clique aos botões de disponibilidade
+btnYes.addEventListener("click", () => toggleAvailability(true));
+btnNo.addEventListener("click", () => toggleAvailability(false));
+
+// Adicionar o evento de envio do formulário
+productForm.addEventListener("submit", handleSubmit);
