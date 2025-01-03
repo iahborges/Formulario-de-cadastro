@@ -3,35 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste</title>
+    <title>Cadastro de Produto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
-<body>
-    <section class="form-container">
-        <h2>Cadastro</h2>
-        <form id="form" class="form">
-            <div class="fm-1">
-                <label for="name" class="form-label">Nome do Produto:</label>
-                <input type="text" id="name" class="form-control" placeholder="Digite o nome do produto" required>
-            </div>
-            <div class="fm-1">
-                <label for="product" class="form-label">Descrição do Produto:</label>
-                <input type="text" id="product" class="form-control" placeholder="Insira a descrição" required>
-            </div>
-            <div class="fm-1">
-                <label for="valor" class="form-label">Valor do Produto:</label>
-                <input type="number" id="number" class="form-control no-arrow" placeholder="Insira o valor" required>
-            </div>
-            <div class="fm-1">
-                <label for="option" class="form-label">Disponível para Venda:</label>
-                <div class="btn-group" role="group" aria-label="Disponível para Venda">
-                    <button type="button" class="btn btn-success" id="btn-sim">Sim</button>
-                    <button type="button" class="btn btn-danger" id="btn-nao">Não</button>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center mb-4">Cadastro de Produto</h2>
+            <form id="product-form" class="product-form">
+                <div class="form-group mb-3">
+                    <label for="product-name" class="form-label">Nome do Produto</label>
+                    <input type="text" id="product-name" class="form-control" placeholder="Digite o nome do produto" required>
                 </div>
-            </div>
-            <button type="submit" class="send">Finalizar</button>
-        </form>
-    </section>
+                <div class="form-group mb-3">
+                    <label for="product-description" class="form-label">Descrição do Produto</label>
+                    <input type="text" id="product-description" class="form-control" placeholder="Insira a descrição do produto" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="product-price" class="form-label">Valor do Produto (R$)</label>
+                    <input type="number" id="product-price" class="form-control no-arrow" placeholder="Insira o valor" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="product-image" class="form-label">Anexar Imagem</label>
+                    <input type="file" id="product-image" class="form-control" accept="image/*">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="product-available" class="form-label">Disponível para Venda</label>
+                    <div class="availability-buttons d-flex" role="group" aria-label="Disponibilidade">
+                        <button type="button" class="btn btn-outline-success w-50" id="btn-yes">
+                            <i class="bi bi-check-circle"></i> Sim
+                        </button>
+                        <button type="button" class="btn btn-outline-danger w-50" id="btn-no">
+                            <i class="bi bi-x-circle"></i> Não
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="submit-button btn btn-primary w-100">Finalizar Cadastro</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.min.js"></script>
+
     <script src="script.js"></script>
 </body>
 </html>
